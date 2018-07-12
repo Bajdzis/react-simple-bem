@@ -1,0 +1,40 @@
+{
+  "name": "react-simple-bem",
+  "version": "0.9.1-alpha",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "babel-node spec/support/run.js",
+    "lint": "eslint ./"
+  },
+  "author": "Rafał 'Bajdzis' Budzis",
+  "license": "MIT",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "prop-types": "^15.6.0",
+    "react": "^16.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "eslint": "^5.1.0",
+    "eslint-plugin-react": "^7.10.0",
+    "jasmine": "^3.1.0",
+    "pre-commit": "^1.2.2"
+  },
+  "dependencies": {},
+  "pre-commit": [
+    "lint",
+    "test"
+  ],
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/Bajdzis/react-simple-bem.git"
+	},
+	"bugs": {
+		"url": "https://github.com/Bajdzis/react-simple-bem/issues"
+	},
+	"homepage": "https://github.com/Bajdzis/react-simple-bem#readme"
+}
