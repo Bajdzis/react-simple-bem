@@ -42,3 +42,14 @@ class Button extends React.Component {
 ```
 
 The Element component automatically retrieves the name of its block.
+
+
+### Correct values for props bemName and bemMod
+
+
+Type | React (JSX) | Output (HTML)
+--- | --- | ---
+string | `<Block bemName="header" bemMod="dark" />` | `<div class="header header--dark">`
+string with space | `<Block bemName="header" bemMod="dark big" />` | `<div class="header header--dark header--big">`
+array | `<Block bemName="header" bemMod={['dark', 'big']} />` | `<div class="header header--dark header--big">`
+object (recommended for condition) | `<Block bemName="header" bemMod={{'dark': true, 'big': false}} />` | `<div class="header header--dark">`
