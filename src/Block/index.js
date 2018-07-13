@@ -51,3 +51,7 @@ Block.propTypes = {
 Block.childContextTypes = {
     BEM_BlockNames: PropTypes.arrayOf(PropTypes.string),
 };
+
+Block.contextTypes = {
+    BEM_StylesObject: PropTypes.object
+};

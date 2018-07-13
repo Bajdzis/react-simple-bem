@@ -34,6 +34,13 @@ describe('Test convertBemValueToArray function', function() {
                     one: 1
                 },
                 expect: ['some', 'valid', 'one']
+            },
+            {
+                test: {
+                    funcTrue: () => (true),
+                    funcFalse: () => (false),
+                },
+                expect: ['funcTrue']
             }
         ];
 

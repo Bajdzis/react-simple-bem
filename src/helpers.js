@@ -37,7 +37,8 @@ export function convertBemValueToArray(bemValue){
             return bemValue;
         }
 
-        return Object.keys(bemValue).filter(key => bemValue[key]);
+        return Object.keys(bemValue)
+            .filter(key => typeof bemValue[key] === 'function' ? bemValue[key]() : bemValue[key]);
     }
 
     return [];

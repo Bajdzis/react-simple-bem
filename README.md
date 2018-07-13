@@ -53,3 +53,4 @@ string | `<Block bemName="header" bemMod="dark" />` | `<div class="header header
 string with space | `<Block bemName="header" bemMod="dark big" />` | `<div class="header header--dark header--big">`
 array | `<Block bemName="header" bemMod={['dark', 'big']} />` | `<div class="header header--dark header--big">`
 object (recommended for condition) | `<Block bemName="header" bemMod={{'dark': true, 'big': false}} />` | `<div class="header header--dark">`
+object with function as value | `<Block bemName="header" bemMod={{'dark': () => true, 'big': () => false}} />` | `<div class="header header--dark">`

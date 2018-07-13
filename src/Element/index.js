@@ -45,4 +45,5 @@ Element.propTypes = {
 
 Element.contextTypes = {
     BEM_BlockNames: PropTypes.arrayOf(PropTypes.string),
+    BEM_StylesObject: PropTypes.object
 };
