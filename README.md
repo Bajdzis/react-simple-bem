@@ -13,7 +13,7 @@ npm i react-simple-bem --save
 import React from 'react';
 import {Block, Element} from 'react-simple-bem';
 
-class Button extends React.Component {
+class SomeComponent extends React.Component {
     render() {
         return (
             <Block bemName="header" bemMod="dark">

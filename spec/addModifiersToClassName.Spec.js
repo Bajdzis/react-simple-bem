@@ -1,63 +1,27 @@
 /* global describe, it, expect */
 
-import {convertBemValueToArray} from '../src/helpers';
+import {addModifiersToClassName} from '../src/helpers';
 
-describe('Test convertBemValueToArray', function() {
+describe('Test addModifiersToClassName function', function() {
 
-    it('String without space must return array with one string', function() {
-        const bemValue = 'some-name';
+    it('must generate string with modifiers', function() {
+        const blockName = 'block';
+        const modifiers = ['dark', 'big'];
 
-        const names = convertBemValueToArray(bemValue);
+        const className = addModifiersToClassName(blockName, modifiers);
 
-        expect(names).toEqual(['some-name']);
+        expect(className).toEqual('block block--dark block--big');
     });
 
-    it('String separate by space must return array of string', function() {
-        const bemValue = 'some name with space';
 
-        const names = convertBemValueToArray(bemValue);
+    it('must generate string without invalid modifiers', function() {
+        const blockName = 'block';
+        const invalidModifiers = [true, false, 0, 1, {}, [], ''];
 
-        expect(names).toEqual(['some', 'name', 'with', 'space']);
-    });
+        const className = addModifiersToClassName(blockName, invalidModifiers);
 
-    it('Object must return array with keys from object', function() {
-        const bemValue = {
-            some: 'value',
-            other: 'value'
-        };
-
-        const names = convertBemValueToArray(bemValue);
-
-        expect(names).toEqual(['some', 'other']);
-    });
-
-    it('Object must delete key if value project to false', function() {
-        const bemValue = {
-            valid: true,
-            dark: null,
-            light: false,
-            empty: '',
-        };
-
-        const names = convertBemValueToArray(bemValue);
-
-        expect(names).toEqual(['valid']);
-    });
-
-    it('Array must return itself', function() {
-        const bemValue = ['some', 'name'];
-
-        const names = convertBemValueToArray(bemValue);
-
-        expect(names).toBe(bemValue);
-    });
-
-    it('invalid type return empty array', function() {
-        const bemValue = false;
-
-        const names = convertBemValueToArray(bemValue);
-
-        expect(names).toEqual([]);
+        expect(className).toEqual('block');
     });
 
 });
+

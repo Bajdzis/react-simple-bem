@@ -11,13 +11,14 @@ export function addModifiersToClassName(className, modifiers = []) {
         .filter((modifier) => typeof modifier === 'string' && modifier.length > 0)
         .map((modifier) => `${className}--${modifier}`)
         .join(' ');
-    return `${className} ${modifiersName}`;
+    return `${className} ${modifiersName}`.trimRight();
 }
 
 /**
  * Converts many possible values to one format.
+ * return empty array if bemValue is invalid
  * @param {string|object|string[]} bemValue 
- * @return {string[]}
+ * @return {string[]} 
  */
 export function convertBemValueToArray(bemValue){
     const type = typeof bemValue;
@@ -26,11 +27,16 @@ export function convertBemValueToArray(bemValue){
         return bemValue.split(' ');
     }
 
-    if(Array.isArray(bemValue)){
-        return bemValue;
-    }
-
     if(type === 'object'){
+
+        if(bemValue === null){
+            return [];
+        }
+
+        if(Array.isArray(bemValue)){
+            return bemValue;
+        }
+
         return Object.keys(bemValue).filter(key => bemValue[key]);
     }
 
