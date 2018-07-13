@@ -1,13 +1,28 @@
 {
   "name": "react-simple-bem",
-  "version": "0.9.5-alpha",
+  "version": "0.9.6",
   "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
-    "lint": "eslint ./"
+    "lint": "eslint ./",
+    "prepublish": "npm run test"
   },
-  "author": "Rafał 'Bajdzis' Budzis",
+  "author": "Rafał 'Bajdzis' Budzis <rafal@budzis.pl>",
+  "keywords": [
+    "bem",
+    "block",
+    "element",
+    "modifier",
+    "react",
+    "simple",
+    "class-name",
+    "classes",
+    "component",
+    "react",
+    "react-component",
+    "naming"
+  ],
   "license": "MIT",
   "optionalDependencies": {},
   "peerDependencies": {
@@ -19,10 +34,17 @@
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^5.1.0",
     "eslint-plugin-react": "^7.10.0",
     "jasmine": "^3.1.0",
-    "pre-commit": "^1.2.2"
+    "jasmine-enzyme": "^6.0.2",
+    "jsdom": "^11.11.0",
+    "pre-commit": "^1.2.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   },
   "dependencies": {},
   "pre-commit": [
@@ -30,11 +52,11 @@
     "test"
   ],
   "repository": {
-		"type": "git",
-		"url": "git+https://github.com/Bajdzis/react-simple-bem.git"
-	},
-	"bugs": {
-		"url": "https://github.com/Bajdzis/react-simple-bem/issues"
-	},
-	"homepage": "https://github.com/Bajdzis/react-simple-bem#readme"
+    "type": "git",
+    "url": "git+https://github.com/Bajdzis/react-simple-bem.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bajdzis/react-simple-bem/issues"
+  },
+  "homepage": "https://github.com/Bajdzis/react-simple-bem#readme"
 }
