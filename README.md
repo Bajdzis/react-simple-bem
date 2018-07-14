@@ -16,7 +16,7 @@ import {Block, Element} from 'react-simple-bem';
 class SomeComponent extends React.Component {
     render() {
         return (
-            <Block bemName="header" bemMod="dark">
+            <Block bemName="header" bemMod="dark" className="not-bem-class">
                 <Element bemName="logo">
                     [...]
                 </Element>
@@ -31,7 +31,7 @@ class SomeComponent extends React.Component {
 ### output :
 
 ```html
-<div class="header header--dark">
+<div class="header header--dark not-bem-class">
     <div class="header__logo">
         [...]
     </div>

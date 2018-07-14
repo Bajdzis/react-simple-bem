@@ -15,7 +15,8 @@ export default class Block extends React.Component {
     getClassName() {
         const names = this.getNames();
         const mods = this.getMods();
-        return names.map(name => addModifiersToClassName(name, mods)).join(' ');
+        const namesWithMods = names.map(name => addModifiersToClassName(name, mods)).join(' ');
+        return `${namesWithMods} ${this.props.className}`.trimRight();
     }
 
     replaceModulesStyles(className){
@@ -45,6 +46,7 @@ export default class Block extends React.Component {
 Block.defaultProps = {
     bemName: [],
     bemMod: [],
+    className: '',
     tagName: 'div'
 };
 
@@ -52,6 +54,7 @@ Block.propTypes = {
     bemName: PropTypesBemValue,
     bemMod: PropTypesBemValue,
     tagName: PropTypes.string,
+    className: PropTypes.string,
     children: PropTypes.any
 };
 
