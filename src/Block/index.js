@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'; 
-import {addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, cleanUpProps} from '../helpers';
+import {addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, cleanUpProps, PropTypesBemSetting, DEFAULT_BEM_SETTING} from '../helpers';
 
 export default class Block extends React.Component {
 
@@ -15,8 +15,20 @@ export default class Block extends React.Component {
     getClassName() {
         const names = this.getNames();
         const mods = this.getMods();
-        const namesWithMods = names.map(name => addModifiersToClassName(name, mods)).join(' ');
+        const setting = this.getBemSetting();
+        const modifierDelimiter = setting.modifierDelimiter;
+        const namesWithMods = names.map(name => addModifiersToClassName(name, mods, modifierDelimiter)).join(' ');
         return `${namesWithMods} ${this.props.className}`.trimRight();
+    }
+
+    getBemSetting(){
+        if(!this.context.BEM_Setting){
+            return DEFAULT_BEM_SETTING;
+        }
+        return {
+            ...DEFAULT_BEM_SETTING,
+            ...this.context.BEM_Setting
+        };
     }
 
     replaceModulesStyles(className){
@@ -63,5 +75,6 @@ Block.childContextTypes = {
 };
 
 Block.contextTypes = {
-    BEM_StylesObject: PropTypes.object
+    BEM_StylesObject: PropTypes.object,
+    BEM_Setting: PropTypesBemSetting,
 };

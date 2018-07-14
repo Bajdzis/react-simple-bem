@@ -30,6 +30,8 @@ class SomeComponent extends React.Component {
 ```
 ### output :
 
+The Element component automatically retrieves the name of its block.
+
 ```html
 <div class="header header--dark not-bem-class">
     <div class="header__logo">
@@ -40,9 +42,6 @@ class SomeComponent extends React.Component {
     </nav>
 </div>
 ```
-
-The Element component automatically retrieves the name of its block.
-
 
 ## Correct values for props bemName and bemMod
 
@@ -66,7 +65,7 @@ class SomeComponent extends React.Component {
     render() {
         return (
             <BemStyles styles={modulesStyles}>
-                <Block bemName="header" bemMod="dark">
+                <Block bemName="header">
                     <Element bemName="logo" />
                 </Block>
             </BemStyles>
@@ -79,5 +78,43 @@ class SomeComponent extends React.Component {
 ```html
 <div class="header_08c6a5">
     <div class="header__logo_08c6a5"></div>
+</div>
+```
+
+## Settings
+
+Name | Type | Default
+--- | --- | ---
+elementDelimiter | string | `__`
+modifierDelimiter | string | `--`
+
+### Change setting with BemSetting Component
+
+```jsx
+import React from 'react';
+import {Block, Element, BemSetting} from 'react-simple-bem';
+
+const setting = {
+    modifierDelimiter: '-mod-',
+    elementDelimiter: '_ele_'
+}
+
+class SomeComponent extends React.Component {
+    render() {
+        return (
+            <BemSetting bemSetting={setting}>
+                <Block bemName="header" bemMod="dark">
+                    <Element bemName="logo" bemMod="big" />
+                </Block>
+            </BemSetting>
+        );
+    }
+};
+```
+### output :
+
+```html
+<div class="header header-mod-dark">
+    <div class="header_ele_logo header_ele_logo-mod-big"></div>
 </div>
 ```

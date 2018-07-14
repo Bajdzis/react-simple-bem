@@ -1,15 +1,23 @@
 import PropTypes from 'prop-types'; 
 
 /**
+ * Default setting
+ */
+export const DEFAULT_BEM_SETTING = {
+    modifierDelimiter: '--',
+    elementDelimiter: '__'
+};
+
+/**
  * Create class name with modifiers
  * @param {string} className 
  * @param {string[]} modifiers 
  * @return {string}
  */
-export function addModifiersToClassName(className, modifiers = []) {
+export function addModifiersToClassName(className, modifiers = [], modifierDelimiter = '--') {
     const modifiersName = modifiers
         .filter((modifier) => typeof modifier === 'string' && modifier.length > 0)
-        .map((modifier) => `${className}--${modifier}`)
+        .map((modifier) => `${className}${modifierDelimiter}${modifier}`)
         .join(' ');
     return `${className} ${modifiersName}`.trimRight();
 }
@@ -68,3 +76,12 @@ export const PropTypesBemValue = PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.object
 ]);
+
+/**
+ * Validator for bem setting
+ */
+export const PropTypesBemSetting = PropTypes.shape({
+    elementDelimiter: PropTypes.string,
+    modifierDelimiter: PropTypes.string
+});
+

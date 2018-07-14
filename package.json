@@ -1,6 +1,6 @@
 {
   "name": "react-simple-bem",
-  "version": "0.9.9",
+  "version": "1.0.0",
   "description": "Library for easier use of BEM methodology in React JS",
   "main": "index.js",
   "scripts": {
