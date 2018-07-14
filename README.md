@@ -44,8 +44,7 @@ class SomeComponent extends React.Component {
 The Element component automatically retrieves the name of its block.
 
 
-### Correct values for props bemName and bemMod
-
+## Correct values for props bemName and bemMod
 
 Type | React (JSX) | Output (HTML)
 --- | --- | ---
@@ -54,3 +53,31 @@ string with space | `<Block bemName="header" bemMod="dark big" />` | `<div class
 array | `<Block bemName="header" bemMod={['dark', 'big']} />` | `<div class="header header--dark header--big">`
 object (recommended for condition) | `<Block bemName="header" bemMod={{'dark': true, 'big': false}} />` | `<div class="header header--dark">`
 object with function as value | `<Block bemName="header" bemMod={{'dark': () => true, 'big': () => false}} />` | `<div class="header header--dark">`
+
+
+## Using with modules styles loader
+
+```jsx
+import React from 'react';
+import {Block, Element, BemStyles} from 'react-simple-bem';
+import modulesStyles from 'style.scss'; // {header : 'header_08c6a5', header__logo : 'header__logo_08c6a5'}
+
+class SomeComponent extends React.Component {
+    render() {
+        return (
+            <BemStyles styles={modulesStyles}>
+                <Block bemName="header" bemMod="dark">
+                    <Element bemName="logo" />
+                </Block>
+            </BemStyles>
+        );
+    }
+};
+```
+### output :
+
+```html
+<div class="header_08c6a5">
+    <div class="header__logo_08c6a5"></div>
+</div>
+```

@@ -19,9 +19,16 @@ export default class Element extends React.Component {
         return names.map(name => addModifiersToClassName(name, mods)).join(' ');
     }
 
+    replaceModulesStyles(className){
+        if(!this.context.BEM_StylesObject){
+            return className;
+        }
+        return className.split(' ').map(className => this.context.BEM_StylesObject[className] || className).join(' ');
+    }
+
     render() {
         const TagName = this.props.tagName;
-        const className = this.getClassName();
+        const className = this.replaceModulesStyles(this.getClassName());
         return (
             <TagName className={className} {...cleanUpProps(this.props)}>
                 {this.props.children}

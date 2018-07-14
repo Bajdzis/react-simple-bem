@@ -1,6 +1,6 @@
 {
   "name": "react-simple-bem",
-  "version": "0.9.6",
+  "version": "0.9.8",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -10,12 +10,13 @@
   },
   "author": "Rafał 'Bajdzis' Budzis <rafal@budzis.pl>",
   "keywords": [
+    "react-simple-bem",
+    "react",
     "bem",
+    "simple",
     "block",
     "element",
     "modifier",
-    "react",
-    "simple",
     "class-name",
     "classes",
     "component",
