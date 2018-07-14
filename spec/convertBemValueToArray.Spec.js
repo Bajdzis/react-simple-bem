@@ -5,7 +5,7 @@ import {convertBemValueToArray} from '../src/helpers';
 
 describe('Test convertBemValueToArray function', function() {
 
-    it('must return itself array', function() {
+    it('must return itself array if you pass an array', function() {
         const bemValue = ['some', 'name'];
 
         const names = convertBemValueToArray(bemValue);

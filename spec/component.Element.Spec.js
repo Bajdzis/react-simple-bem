@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import Block from '../src/Block';
 import Element from '../src/Element';
 
-describe('Test Block Component', function() {
+describe('Test Element Component', function() {
 
     it('must retrieves block name', function() {
         const wrapper = mount(<Block bemName="header">
