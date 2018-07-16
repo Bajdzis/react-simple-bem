@@ -1,9 +1,7 @@
 /* global describe, it, expect */
 import React from 'react';
 import {mount} from 'enzyme';
-import Block from '../src/Block';
-import Element from '../src/Element';
-import BemSetting from '../src/BemSetting';
+import {Block, Element, BemSetting} from '../index';
 
 describe('Test BemSetting Component', function() {
 

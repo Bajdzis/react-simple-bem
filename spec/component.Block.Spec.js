@@ -1,7 +1,7 @@
 /* global describe, it, expect */
 import React from 'react';
 import {shallow } from 'enzyme';
-import Block from '../src/Block';
+import {Block} from '../index';
 
 describe('Test Block Component', function() {
 

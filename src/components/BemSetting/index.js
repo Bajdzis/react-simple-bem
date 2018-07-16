@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'; 
-import { DEFAULT_BEM_SETTING, PropTypesBemSetting } from '../helpers';
+import { DEFAULT_BEM_SETTING, PropTypesBemSetting } from '../../helpers';
 export default class BemSetting extends React.Component {
 
     getChildContext() {

@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types'; 
-import {addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, cleanUpProps, PropTypesBemSetting, DEFAULT_BEM_SETTING} from '../helpers';
+import {addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, cleanUpProps, PropTypesBemSetting, DEFAULT_BEM_SETTING} from '../../helpers';
 
-export default class Block extends React.Component {
+export default class Element extends React.Component {
 
     getMods() {
         return convertBemValueToArray(this.props.bemMod);
     }
 
     getNames() {
-        return convertBemValueToArray(this.props.bemName);
+        const setting = this.getBemSetting();
+        const elementDelimiter = setting.elementDelimiter;
+        return convertBemValueToArray(this.props.bemName)
+            .map(name => `${this.context.BEM_BlockNames}${elementDelimiter}${name}`);
     }
 
     getClassName() {
@@ -38,12 +41,6 @@ export default class Block extends React.Component {
         return className.split(' ').map(className => this.context.BEM_StylesObject[className] || className).join(' ');
     }
 
-    getChildContext() {
-        return {
-            BEM_BlockNames: this.getNames(),
-        };
-    }
-
     render() {
         const TagName = this.props.tagName;
         const className = this.replaceModulesStyles(this.getClassName());
@@ -55,14 +52,14 @@ export default class Block extends React.Component {
     }
 }
 
-Block.defaultProps = {
+Element.defaultProps = {
     bemName: [],
     bemMod: [],
     className: '',
     tagName: 'div'
 };
 
-Block.propTypes = {
+Element.propTypes = {
     bemName: PropTypesBemValue,
     bemMod: PropTypesBemValue,
     tagName: PropTypes.string,
@@ -70,11 +67,8 @@ Block.propTypes = {
     children: PropTypes.any
 };
 
-Block.childContextTypes = {
+Element.contextTypes = {
     BEM_BlockNames: PropTypes.arrayOf(PropTypes.string),
-};
-
-Block.contextTypes = {
     BEM_StylesObject: PropTypes.object,
     BEM_Setting: PropTypesBemSetting,
 };

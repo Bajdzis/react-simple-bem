@@ -1,9 +1,7 @@
 /* global describe, it, expect */
 import React from 'react';
 import {mount} from 'enzyme';
-import Block from '../src/Block';
-import Element from '../src/Element';
-import BemStyles from '../src/BemStyles';
+import {Block, Element, BemStyles} from '../index';
 
 const modulesCssStyles = {
     'header': 'header_08c6a5',

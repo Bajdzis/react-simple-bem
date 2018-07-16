@@ -1,8 +1,7 @@
 /* global describe, it, expect */
 import React from 'react';
 import { mount } from 'enzyme';
-import Block from '../src/Block';
-import Element from '../src/Element';
+import {Block, Element} from '../index';
 
 describe('Test Element Component', function() {
 
