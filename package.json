@@ -1,12 +1,12 @@
 {
   "name": "react-simple-bem",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Library for easier use of BEM methodology in React JS",
   "main": "index.js",
   "scripts": {
     "test": "jasmine",
     "lint": "eslint ./",
-    "prepublish": "npm run test"
+    "prepublish": "npm test"
   },
   "author": "Rafał 'Bajdzis' Budzis <rafal@budzis.pl>",
   "keywords": [
@@ -22,7 +22,8 @@
     "component",
     "react",
     "react-component",
-    "naming"
+    "naming",
+    "decorator"
   ],
   "license": "MIT",
   "optionalDependencies": {},

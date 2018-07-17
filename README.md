@@ -118,3 +118,44 @@ class SomeComponent extends React.Component {
     <div class="header_ele_logo header_ele_logo-mod-big"></div>
 </div>
 ```
+
+
+## Custom component
+
+You can create your own component of a `<Block>` or `<Element>`. 
+To do this you must use the function `bemElementDecorator()` or `bemBlockDecorator()`.
+
+```jsx
+import React from 'react';
+import {Element, bemBlockDecorator} from 'react-simple-bem';
+
+function CustomBlockComponent(props) {
+    return <h1 className={props.className}>
+        <Element bemName="icon" />{props.title}
+    </h1>;
+}
+
+export default bemBlockDecorator(CustomBlockComponent);
+```
+
+### using : 
+
+```jsx
+import React from 'react';
+import CustomBlockComponent from './CustomBlockComponent';
+
+class SomeComponent extends React.Component {
+    render() {
+        return (
+            <CustomBlockComponent bemName="header" bemMod="dark" title="some title"/>
+        );
+    }
+};
+```
+
+### output :
+```html
+<h1 class="header header--dark">
+    <div class="header__icon"></div>some title
+</h1>
+```

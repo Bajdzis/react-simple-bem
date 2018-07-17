@@ -22,8 +22,7 @@ describe('Test cleanUpProps function', function() {
             some: 'props',
             bemName: 'block',
             bemMod: [],
-            className: 'class',
-            tagName: 'div'
+            className: 'class'
         };
 
         const cleanProps = cleanUpProps(props);
@@ -33,7 +32,6 @@ describe('Test cleanUpProps function', function() {
         expect(keys).not.toContain('bemName');
         expect(keys).not.toContain('bemMod');
         expect(keys).not.toContain('className');
-        expect(keys).not.toContain('tagName');
     });
 
 });

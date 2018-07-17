@@ -1,15 +1,16 @@
 /* global describe, it, expect */
 import React from 'react';
-import {shallow } from 'enzyme';
+import {shallow, mount} from 'enzyme';
 import {Block} from '../index';
 
 describe('Test Block Component', function() {
 
     it('must render correct className and default tagName', function() {
-        const wrapper = shallow(<Block bemName="header"/>);
+        const wrapper = mount(<Block bemName="header"/>);
 
-        expect(wrapper).toHaveClassName('header');
-        expect(wrapper).toHaveTagName('div');
+        expect(wrapper.getDOMNode().className).toEqual('header');
+        expect(wrapper.getDOMNode().tagName).toEqual('DIV');
+        expect(wrapper.html()).toEqual('<div class="header"></div>');
     });
 
     it('must render additional className without BEM methodology', function() {
@@ -20,10 +21,11 @@ describe('Test Block Component', function() {
     });
 
     it('must render custom tagName', function() {
-        const wrapper = shallow(<Block bemName="header" tagName="span"/>);
+        const wrapper = mount(<Block bemName="header" tagName="span"/>);
 
-        expect(wrapper).toHaveClassName('header');
-        expect(wrapper).toHaveTagName('span');
+        expect(wrapper.getDOMNode().className).toEqual('header');
+        expect(wrapper.getDOMNode().tagName).toEqual('SPAN');
+        expect(wrapper.html()).toEqual('<span class="header"></span>');
     });
 
     it('must render className with modifiers', function() {
