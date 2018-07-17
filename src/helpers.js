@@ -62,6 +62,7 @@ export function cleanUpProps(props){
     delete props.bemName;
     delete props.bemMod;
     delete props.className;
+    delete props.bemBlock;
 
     return props;
 }

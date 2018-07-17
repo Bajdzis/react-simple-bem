@@ -119,6 +119,30 @@ class SomeComponent extends React.Component {
 </div>
 ```
 
+### Mixed block name and modifiers
+
+```jsx
+import React from 'react';
+import {Block, Element} from 'react-simple-bem';
+
+class SomeComponent extends React.Component {
+    render() {
+        return (
+            <Block bemName="header">
+                <Element bemName="logo" bemBlock="some other"/>
+            </Block>
+        );
+    }
+};
+```
+
+### output :
+
+```html
+<div class="header">
+    <div class="some__logo other__logo"></div>
+</div>
+```
 
 ## Custom component
 

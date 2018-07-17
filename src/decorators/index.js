@@ -27,8 +27,9 @@ function bemClassName(Component, isBemBlock){
         getNamesForElement() {
             const setting = this.getBemSetting();
             const elementDelimiter = setting.elementDelimiter;
+            const blockName = this.props.bemBlock && convertBemValueToArray(this.props.bemBlock) || this.context.BEM_BlockNames;
             return convertBemValueToArray(this.props.bemName)
-                .map(name => `${this.context.BEM_BlockNames}${elementDelimiter}${name}`);
+                .map(name => `${blockName}${elementDelimiter}${name}`);
         }
 
         getClassName() {
@@ -74,12 +75,14 @@ function bemClassName(Component, isBemBlock){
     BemDecoratorComponent.defaultProps = {
         bemName: [],
         bemMod: [],
-        className: ''
+        className: '',
+        bemBlock: null
     };
 
     BemDecoratorComponent.propTypes = {
         bemName: PropTypesBemValue,
         bemMod: PropTypesBemValue,
+        bemBlock: PropTypesBemValue,
         className: PropTypes.string,
         children: PropTypes.any
     };

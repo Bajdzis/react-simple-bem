@@ -22,4 +22,12 @@ describe('Test Element Component', function() {
         expect(wrapper.find('div#element_logo')).toHaveClassName('not-bem-class');
     });
 
+    it('must be able to overwrite block name', function() {
+        const wrapper = mount(<Block bemName="header">
+            <Element id="element_logo" bemName="logo" bemBlock="other-block"/>
+        </Block>);
+
+        expect(wrapper.find('div#element_logo')).toHaveClassName('other-block__logo');
+    });
+
 });
