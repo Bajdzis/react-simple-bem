@@ -12,14 +12,13 @@ export const DEFAULT_BEM_SETTING = {
  * Create class name with modifiers
  * @param {string} className 
  * @param {string[]} modifiers 
- * @return {string}
+ * @return {string[]}
  */
 export function addModifiersToClassName(className, modifiers = [], modifierDelimiter = '--') {
     const modifiersName = modifiers
         .filter((modifier) => typeof modifier === 'string' && modifier.length > 0)
-        .map((modifier) => `${className}${modifierDelimiter}${modifier}`)
-        .join(' ');
-    return `${className} ${modifiersName}`.trimRight();
+        .map((modifier) => `${className}${modifierDelimiter}${modifier}`);
+    return [className, ...modifiersName];
 }
 
 /**

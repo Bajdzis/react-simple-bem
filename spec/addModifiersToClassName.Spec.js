@@ -10,7 +10,7 @@ describe('Test addModifiersToClassName function', function() {
 
         const className = addModifiersToClassName(blockName, modifiers);
 
-        expect(className).toEqual('block block--dark block--big');
+        expect(className).toEqual(['block', 'block--dark', 'block--big']);
     });
 
 
@@ -20,7 +20,7 @@ describe('Test addModifiersToClassName function', function() {
 
         const className = addModifiersToClassName(blockName, invalidModifiers);
 
-        expect(className).toEqual('block');
+        expect(className).toEqual(['block']);
     });
 
 });

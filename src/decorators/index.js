@@ -36,8 +36,12 @@ function bemClassName(Component, isBemBlock){
             const mods = this.getMods();
             const setting = this.getBemSetting();
             const modifierDelimiter = setting.modifierDelimiter;
-            const namesWithMods = names.map(name => addModifiersToClassName(name, mods, modifierDelimiter)).join(' ');
-            return `${namesWithMods} ${this.props.className}`.trimRight();
+            const classNames = [];
+            names.forEach(name => classNames.push(...addModifiersToClassName(name, mods, modifierDelimiter)));
+            if(this.props.className){
+                classNames.push(this.props.className);
+            }
+            return classNames;
         }
 
         getBemSetting(){
@@ -50,15 +54,15 @@ function bemClassName(Component, isBemBlock){
             };
         }
 
-        replaceModulesStyles(className){
+        replaceModulesStyles(classNames){
             if(!this.context.BEM_StylesObject){
-                return className;
+                return classNames;
             }
-            return className.split(' ').map(className => this.context.BEM_StylesObject[className] || className).join(' ');
+            return classNames.map(className => this.context.BEM_StylesObject[className] || className);
         }
 
         render() {
-            const className = this.replaceModulesStyles(this.getClassName());
+            const className = this.replaceModulesStyles(this.getClassName()).join(' ');
             return (
                 <Component className={className} {...cleanUpProps(this.props)}>
                     {this.props.children}
