@@ -34,4 +34,14 @@ describe('Test Block Component', function() {
         expect(wrapper).toHaveClassName('header header--dark header--big');
     });
 
+    it('must generate correct mixed modifiers classNames', function () {
+        const blockNames = 'header nav';
+        const elements = ['dark:block(header)', 'focus:block(nav)', 'common:block(header):block(nav)'];
+
+        const wrapper = mount(<Block id="element_logo" bemName={blockNames} bemMod={elements}></Block>);
+
+        expect(wrapper.find('div#element_logo')).toHaveClassName('header--dark nav--focus header--common nav--common');
+        expect(wrapper.find('div#element_logo')).not.toHaveClassName('nav--dark header--focus');
+    });
+
 });

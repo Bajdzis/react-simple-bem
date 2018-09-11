@@ -23,5 +23,14 @@ describe('Test addModifiersToClassName function', function() {
         expect(className).toEqual(['block']);
     });
 
+    it('must generate correct mixed modifiers classNames', function() {
+        const blockName = 'blockName';
+        const modifiers = ['dark:block(header)', 'big:block(blockName)', 'common:block(header):block(blockName)'];
+
+        const className = addModifiersToClassName(blockName, modifiers);
+
+        expect(className).toEqual(['blockName', 'blockName--big', 'blockName--common']);
+    });
+
 });
 

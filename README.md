@@ -87,6 +87,9 @@ Name | Type | Default
 --- | --- | ---
 elementDelimiter | string | `__`
 modifierDelimiter | string | `--`
+bemIndicationMod | RegEx |  `/:element\(([a-z]*)\)/gi`
+bemIndicationElement | RegEx | `/:block\(([a-z]*)\)/gi`
+bemIndicationSeparator | string |  `:`
 
 ### Change setting with BemSetting Component
 
@@ -119,7 +122,7 @@ class SomeComponent extends React.Component {
 </div>
 ```
 
-### Mixed block name and modifiers
+## Mixed block name and modifiers
 
 ```jsx
 import React from 'react';
@@ -128,8 +131,14 @@ import {Block, Element} from 'react-simple-bem';
 class SomeComponent extends React.Component {
     render() {
         return (
-            <Block bemName="header">
+            <Block bemName="header body">
                 <Element bemName="logo" bemBlock="some other"/>
+                <Element bemName="nav" bemMod="dark"/>
+                <Element bemName="nav" bemMod="dark:block(header)"/>
+                <Element 
+                    bemName="logo:block(header) link:block(body)" 
+                    bemBlock="hover:element(link) other:element(logo)"
+                />
             </Block>
         );
     }
@@ -141,6 +150,9 @@ class SomeComponent extends React.Component {
 ```html
 <div class="header">
     <div class="some__logo other__logo"></div>
+    <div class="header__nav body__nav header__nav--dark body__nav--dark"></div>
+    <div class="some__logo other__logo header__nav--dark"></div>
+    <div class="header__logo body__link body__link--hover header__logo--other"></div>
 </div>
 ```
 

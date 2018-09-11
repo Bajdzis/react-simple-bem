@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'; 
-import {addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, cleanUpProps, PropTypesBemSetting, DEFAULT_BEM_SETTING} from '../helpers';
+import { checkBemInfoCondition, addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, cleanUpProps, PropTypesBemSetting, getStringBemInfo, DEFAULT_BEM_SETTING} from '../helpers';
 
 function bemClassName(Component, isBemBlock){
     class BemDecoratorComponent extends React.Component {
@@ -27,18 +27,24 @@ function bemClassName(Component, isBemBlock){
         getNamesForElement() {
             const setting = this.getBemSetting();
             const elementDelimiter = setting.elementDelimiter;
-            const blockName = this.props.bemBlock && convertBemValueToArray(this.props.bemBlock) || this.context.BEM_BlockNames;
-            return convertBemValueToArray(this.props.bemName)
-                .map(name => `${blockName}${elementDelimiter}${name}`);
+            const blockNames = this.props.bemBlock && convertBemValueToArray(this.props.bemBlock) || this.context.BEM_BlockNames;
+            const result = [];
+            blockNames.forEach(blockName => {
+                const value = convertBemValueToArray(this.props.bemName)
+                    .map(name => getStringBemInfo(name, setting))
+                    .filter(info => checkBemInfoCondition(info, blockName, ''))
+                    .map(info => `${blockName}${elementDelimiter}${info.className}`);
+                result.push(...value);
+            });
+            return result;
         }
 
         getClassName() {
             const names = isBemBlock ? this.getNamesForBlock() : this.getNamesForElement();
             const mods = this.getMods();
             const setting = this.getBemSetting();
-            const modifierDelimiter = setting.modifierDelimiter;
             const classNames = [];
-            names.forEach(name => classNames.push(...addModifiersToClassName(name, mods, modifierDelimiter)));
+            names.forEach(name => classNames.push(...addModifiersToClassName(name, mods, setting)));
             if(this.props.className){
                 classNames.push(this.props.className);
             }
