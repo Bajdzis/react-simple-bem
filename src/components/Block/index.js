@@ -4,7 +4,6 @@ import {bemBlockDecorator} from '../../decorators';
 
 class Block extends React.Component {
 
-
     render() {
         const TagName = this.props.tagName;
         const props = {...this.props};

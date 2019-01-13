@@ -1,8 +1,10 @@
 {
   "name": "react-simple-bem",
-  "version": "1.3.1",
+  "version": "1.4.0",
   "description": "Library for easier use of BEM methodology in React JS",
   "main": "lib/index.js",
+  "types": "types/react-simple-bem.d.ts",
+  "typings": "types/react-simple-bem.d.ts",
   "scripts": {
     "test": "jasmine",
     "lint": "eslint ./ --ignore-pattern \"lib\/\"",
@@ -24,7 +26,10 @@
     "react",
     "react-component",
     "naming",
-    "decorator"
+    "decorator",
+    "typings",
+    "typescript",
+    "types"
   ],
   "license": "MIT",
   "optionalDependencies": {},

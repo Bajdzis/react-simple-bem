@@ -108,8 +108,6 @@ function bemClassName(Component, isBemBlock){
     return BemDecoratorComponent;
 }
 
-export function bemBlockDecorator(Component) { return bemClassName(Component, true); }
+export const bemBlockDecorator = (Component) => bemClassName(Component, true); 
 
-export function bemElementDecorator(Component) { return bemClassName(Component, false); }
-
-
+export const bemElementDecorator = (Component) => bemClassName(Component, false);
