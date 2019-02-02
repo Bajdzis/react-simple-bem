@@ -70,8 +70,9 @@ function bemClassName(Component, isBemBlock){
 
         render() {
             const className = this.replaceModulesStyles(this.getClassName()).join(' ');
+            const {forwardedRef, ...props} =  this.props;
             return (
-                <Component className={className} {...cleanUpProps(this.props)}>
+                <Component className={className} forwardedRef={forwardedRef} {...cleanUpProps(props)}>
                     {this.props.children}
                 </Component>
             );
@@ -90,7 +91,8 @@ function bemClassName(Component, isBemBlock){
         bemMod: PropTypesBemValue,
         bemBlock: PropTypesBemValue,
         className: PropTypes.string,
-        children: PropTypes.any
+        children: PropTypes.any,
+        forwardedRef: PropTypes.func,
     };
 
     if(isBemBlock){

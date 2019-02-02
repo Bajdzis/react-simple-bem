@@ -73,4 +73,13 @@ describe('Test Element Component', function() {
         expect(wrapper.find('div#element_logo')).not.toHaveClassName('nav__button--disable header__link--primary header__button--hover');
     });
 
+    it('must return DOM node element in forwardedRef callback', function () {
+        let DOMElement = null;
+        mount(<Block bemName="header">
+            <Element forwardedRef={(ref) => DOMElement = ref} bemName="button"/>
+        </Block>);
+    
+        expect(DOMElement.constructor.name).toEqual('HTMLDivElement');
+    });
+
 });

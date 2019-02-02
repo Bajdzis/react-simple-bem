@@ -27,6 +27,7 @@ interface BemComponent extends React.Component<BemComponentProps> {}
 
 interface BemDefaultComponentProps extends BemComponentProps {
     tagName?: string;
+    forwardedRef?: () => HTMLElement | null;
 }
 
 interface BemDefaultComponent extends React.Component<BemDefaultComponentProps> {}

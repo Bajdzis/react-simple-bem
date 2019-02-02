@@ -44,4 +44,11 @@ describe('Test Block Component', function() {
         expect(wrapper.find('div#element_logo')).not.toHaveClassName('nav--dark header--focus');
     });
 
+    it('must return DOM node element in forwardedRef callback', function () {
+        let DOMElement = null;
+        mount(<Block forwardedRef={(ref) => DOMElement = ref} ></Block>);
+    
+        expect(DOMElement.constructor.name).toEqual('HTMLDivElement');
+    });
+
 });

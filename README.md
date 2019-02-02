@@ -122,6 +122,30 @@ class SomeComponent extends React.Component {
 </div>
 ```
 
+## Using ref
+
+If you want to get HTMLElement use forwardedRef properties.
+
+```jsx
+import React from 'react';
+import {Block, Element} from 'react-simple-bem';
+
+function SomeComponent() {
+    return (
+        <Block 
+            bemName="header" 
+            forwardedRef={ref => console.log('header ref is', ref)} 
+        >
+            <Element 
+                bemName="logo" 
+                forwardedRef={ref => console.log('logo ref is', ref)} 
+            />
+        </Block>
+    );
+}
+
+```
+
 ## Mixed block name and modifiers
 
 ```jsx
