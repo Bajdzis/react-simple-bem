@@ -7,9 +7,25 @@
   "typings": "types/react-simple-bem.d.ts",
   "scripts": {
     "test": "jasmine",
+    "test:coverage": "cross-env NODE_ENV=coverage nyc jasmine",
+    "coveralls": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "eslint ./ --ignore-pattern \"lib/\"",
     "prepare": "babel ./ --out-dir lib --ignore \"node_modules\",\"spec\",\"lib\"",
     "prepublish": "npm test"
+  },
+  "nyc": {
+    "require": [
+      "babel-core/register"
+    ],
+    "include": [
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "spec/helpers/babel.js"
+    ],
+    "all": true,
+    "sourceMap": false,
+    "instrument": false
   },
   "author": "Rafał 'Bajdzis' Budzis <rafal@budzis.pl>",
   "keywords": [
@@ -40,16 +56,21 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
+    "babel-plugin-istanbul": "^5.1.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
+    "coveralls": "^3.0.2",
+    "cross-env": "^5.2.0",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.8.0",
     "eslint": "^5.13.0",
     "eslint-plugin-react": "^7.12.4",
+    "istanbul": "^0.4.5",
     "jasmine": "^3.3.1",
     "jasmine-enzyme": "^6.1.2",
     "jsdom": "^11.12.0",
+    "nyc": "^13.2.0",
     "pre-commit": "^1.2.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",

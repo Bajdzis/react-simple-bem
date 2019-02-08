@@ -3,5 +3,10 @@
 		"env",
 		"react",
 		"stage-2"
-	]
+	],
+	"env": {
+        "coverage": {
+          	"plugins": ["istanbul"]
+        }
+    }
 }

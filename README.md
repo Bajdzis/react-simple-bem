@@ -1,4 +1,10 @@
 # react-simple-bem
+
+[![Build Status](https://travis-ci.com/Bajdzis/react-simple-bem.svg?branch=master)](https://travis-ci.com/Bajdzis/react-simple-bem)
+[![Coverage Status](https://coveralls.io/repos/github/Bajdzis/react-simple-bem/badge.svg?branch=master)](https://coveralls.io/github/Bajdzis/react-simple-bem?branch=master)
+![All download](https://img.shields.io/npm/dt/react-simple-bem.svg?style=flat)
+![License](https://img.shields.io/npm/l/react-simple-bem.svg?style=flat)
+
 Library for easier use of BEM methodology in React JS
 
 ## Install
