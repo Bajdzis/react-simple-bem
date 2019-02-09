@@ -22,16 +22,11 @@ export function addModifiersToClassName(className, modifiers = [], setting = DEF
     const [block, element] = className.split(setting.elementDelimiter);
 
     const modifiersName = modifiers
-        .filter(modifier => typeof modifier === 'string')
-        .filter(modifier => modifier.length)
-        .map((modifier) => {
-            const bemModifierInfo = getStringBemInfo(modifier, setting);
-            if (checkBemInfoCondition(bemModifierInfo, block, element) === false) {
-                return '';
-            }
-            return `${className}${setting.modifierDelimiter}${bemModifierInfo.className}`;
-        })
-        .filter((modifier) => modifier.length > 0);
+        .filter(modifier => typeof modifier === 'string' && modifier.length)
+        .map((modifier) => getStringBemInfo(modifier, setting))
+        .filter((bemModifierInfo) => checkBemInfoCondition(bemModifierInfo, block, element))
+        .map((bemModifierInfo) => `${className}${setting.modifierDelimiter}${bemModifierInfo.className}`);
+
     return [className, ...modifiersName];
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "react-simple-bem",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "Library for easier use of BEM methodology in React JS",
   "main": "lib/index.js",
   "types": "types/react-simple-bem.d.ts",

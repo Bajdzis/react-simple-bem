@@ -1,4 +1,4 @@
 import {bemElementDecorator} from '../../decorators';
 import {Tag} from '../Tag';
 
-export default bemElementDecorator(Tag);
+export const Element = bemElementDecorator(Tag);
