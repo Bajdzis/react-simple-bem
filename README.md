@@ -19,20 +19,16 @@ npm i react-simple-bem --save
 import React from 'react';
 import {Block, Element} from 'react-simple-bem';
 
-class SomeComponent extends React.Component {
-    render() {
-        return (
-            <Block bemName="header" bemMod="dark" className="not-bem-class">
-                <Element bemName="logo">
-                    [...]
-                </Element>
-                <Element bemName="menu" bemMod={['special', 'awesome']} tagName="nav">
-                    [...]
-                </Element>
-            </Block>
-        );
-    }
-};
+const SomeComponent = () => (
+    <Block bemName="header" bemMod="dark" className="not-bem-class">
+        <Element bemName="logo">
+            [...]
+        </Element>
+        <Element bemName="menu" bemMod={['special', 'awesome']} tagName="nav">
+            [...]
+        </Element>
+    </Block>
+);
 ```
 ### output :
 
@@ -67,17 +63,13 @@ import React from 'react';
 import {Block, Element, BemStyles} from 'react-simple-bem';
 import modulesStyles from 'style.scss'; // {header : 'header_08c6a5', header__logo : 'header__logo_08c6a5'}
 
-class SomeComponent extends React.Component {
-    render() {
-        return (
-            <BemStyles styles={modulesStyles}>
-                <Block bemName="header">
-                    <Element bemName="logo" />
-                </Block>
-            </BemStyles>
-        );
-    }
-};
+const SomeComponent = () => (
+    <BemStyles styles={modulesStyles}>
+        <Block bemName="header">
+            <Element bemName="logo" />
+        </Block>
+    </BemStyles>
+);
 ```
 ### output :
 
@@ -108,17 +100,13 @@ const setting = {
     elementDelimiter: '_ele_'
 }
 
-class SomeComponent extends React.Component {
-    render() {
-        return (
-            <BemSetting bemSetting={setting}>
-                <Block bemName="header" bemMod="dark">
-                    <Element bemName="logo" bemMod="big" />
-                </Block>
-            </BemSetting>
-        );
-    }
-};
+const SomeComponent = () => (
+    <BemSetting bemSetting={setting}>
+        <Block bemName="header" bemMod="dark">
+            <Element bemName="logo" bemMod="big" />
+        </Block>
+    </BemSetting>
+);
 ```
 ### output :
 
@@ -136,20 +124,17 @@ If you want to get HTMLElement use forwardedRef properties.
 import React from 'react';
 import {Block, Element} from 'react-simple-bem';
 
-function SomeComponent() {
-    return (
-        <Block 
-            bemName="header" 
-            forwardedRef={ref => console.log('header ref is', ref)} 
-        >
-            <Element 
-                bemName="logo" 
-                forwardedRef={ref => console.log('logo ref is', ref)} 
-            />
-        </Block>
-    );
-}
-
+const SomeComponent = () => (
+    <Block 
+        bemName="header" 
+        forwardedRef={ref => console.log('header ref is', ref)} 
+    >
+        <Element 
+            bemName="logo" 
+            forwardedRef={ref => console.log('logo ref is', ref)} 
+        />
+    </Block>
+);
 ```
 
 ## Mixed block name and modifiers
@@ -158,21 +143,17 @@ function SomeComponent() {
 import React from 'react';
 import {Block, Element} from 'react-simple-bem';
 
-class SomeComponent extends React.Component {
-    render() {
-        return (
-            <Block bemName="header body">
-                <Element bemName="logo" bemBlock="some other"/>
-                <Element bemName="nav" bemMod="dark"/>
-                <Element bemName="nav" bemMod="dark:block(header)"/>
-                <Element 
-                    bemName="logo:block(header) link:block(body)" 
-                    bemBlock="hover:element(link) other:element(logo)"
-                />
-            </Block>
-        );
-    }
-};
+const SomeComponent = () => (
+    <Block bemName="header body">
+        <Element bemName="logo" bemBlock="some other"/>
+        <Element bemName="nav" bemMod="dark"/>
+        <Element bemName="nav" bemMod="dark:block(header)"/>
+        <Element
+            bemName="logo:block(header) link:block(body)"
+            bemBlock="hover:element(link) other:element(logo)"
+        />
+    </Block>
+);
 ```
 
 ### output :
@@ -195,28 +176,24 @@ To do this you must use the function `bemElementDecorator()` or `bemBlockDecorat
 import React from 'react';
 import {Element, bemBlockDecorator} from 'react-simple-bem';
 
-function CustomBlockComponent(props) {
-    return <h1 className={props.className}>
+const CustomBlockComponent = (props) => (
+    <h1 className={props.className}>
         <Element bemName="icon" />{props.title}
-    </h1>;
-}
+    </h1>
+);
 
-export default bemBlockDecorator(CustomBlockComponent);
+export const CustomBlock = bemBlockDecorator(CustomBlockComponent);
 ```
 
 ### using : 
 
 ```jsx
 import React from 'react';
-import CustomBlockComponent from './CustomBlockComponent';
+import { CustomBlock } from './CustomBlock';
 
-class SomeComponent extends React.Component {
-    render() {
-        return (
-            <CustomBlockComponent bemName="header" bemMod="dark" title="some title"/>
-        );
-    }
-};
+const SomeComponent = () => (
+    <CustomBlock bemName="header" bemMod="dark" title="some title"/>
+);
 ```
 
 ### output :
