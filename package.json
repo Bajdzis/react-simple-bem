@@ -1,6 +1,6 @@
 {
   "name": "react-simple-bem",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "Library for easier use of BEM methodology in React JS",
   "main": "lib/index.js",
   "types": "types/react-simple-bem.d.ts",
@@ -10,7 +10,7 @@
     "test:coverage": "cross-env NODE_ENV=coverage nyc jasmine",
     "coveralls": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js",
     "lint": "eslint ./ --ignore-pattern \"lib/\"",
-    "prepare": "babel ./ --out-dir lib --ignore \"node_modules\",\"spec\",\"lib\"",
+    "prepare": "tsc",
     "prepublish": "npm test"
   },
   "nyc": {
@@ -74,7 +74,8 @@
     "pre-commit": "^1.2.2",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
-    "react-dom": "^16.7.0"
+    "react-dom": "^16.7.0",
+    "typescript": "^3.5.3"
   },
   "dependencies": {},
   "pre-commit": [
