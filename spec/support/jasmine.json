@@ -4,6 +4,7 @@
     "**/*[sS]pec.js"
   ],
   "helpers": [
+    "helpers/type-script.js",
     "helpers/babel.js",
     "helpers/enzyme.js",
     "helpers/jsdom.js",

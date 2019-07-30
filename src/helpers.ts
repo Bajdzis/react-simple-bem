@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types'; 
+import * as PropTypes from 'prop-types'; 
 
 /**
  * Default setting
@@ -18,7 +18,7 @@ export const DEFAULT_BEM_SETTING = {
  * @param {object} setting 
  * @return {string[]}
  */
-export function addModifiersToClassName(className, modifiers = [], setting = DEFAULT_BEM_SETTING) {
+export function addModifiersToClassName(className: string, modifiers: string[] = [], setting = DEFAULT_BEM_SETTING): string[] {
     const [block, element] = className.split(setting.elementDelimiter);
 
     const modifiersName = modifiers
@@ -37,7 +37,7 @@ export function addModifiersToClassName(className, modifiers = [], setting = DEF
  * @param {string} element
  * @return {bool}
  */
-export function checkBemInfoCondition(bemInfo, block, element = ''){
+export function checkBemInfoCondition(bemInfo, block: string, element: string = ''): boolean {
     if (bemInfo.blocksName.length > 0 && bemInfo.blocksName.indexOf(block) === -1) {
         return false;
     }
@@ -53,7 +53,7 @@ export function checkBemInfoCondition(bemInfo, block, element = ''){
  * @param {object} setting 
  * @return {object}
  */
-export function getStringBemInfo(className, setting = DEFAULT_BEM_SETTING) {
+export function getStringBemInfo(className: string, setting = DEFAULT_BEM_SETTING) {
     const blocksName = [];
     const elementsName = [];
     const [onlyClassName] = className.split(setting.bemIndicationSeparator);
@@ -80,7 +80,7 @@ export function getStringBemInfo(className, setting = DEFAULT_BEM_SETTING) {
  * @param {string|object|string[]} bemValue 
  * @return {string[]} 
  */
-export function convertBemValueToArray(bemValue){
+export function convertBemValueToArray(bemValue): string[] {
     const type = typeof bemValue;
 
     if(type === 'string'){
