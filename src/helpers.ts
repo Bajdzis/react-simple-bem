@@ -1,4 +1,5 @@
 import * as PropTypes from 'prop-types'; 
+import { BemValue, BemInfo } from './domain';
 
 /**
  * Default setting
@@ -37,7 +38,7 @@ export function addModifiersToClassName(className: string, modifiers: string[] =
  * @param {string} element
  * @return {bool}
  */
-export function checkBemInfoCondition(bemInfo, block: string, element: string = ''): boolean {
+export function checkBemInfoCondition(bemInfo: BemInfo, block: string, element: string = ''): boolean {
     if (bemInfo.blocksName.length > 0 && bemInfo.blocksName.indexOf(block) === -1) {
         return false;
     }
@@ -53,7 +54,7 @@ export function checkBemInfoCondition(bemInfo, block: string, element: string = 
  * @param {object} setting 
  * @return {object}
  */
-export function getStringBemInfo(className: string, setting = DEFAULT_BEM_SETTING) {
+export function getStringBemInfo(className: string, setting = DEFAULT_BEM_SETTING): BemInfo {
     const blocksName = [];
     const elementsName = [];
     const [onlyClassName] = className.split(setting.bemIndicationSeparator);
@@ -80,14 +81,13 @@ export function getStringBemInfo(className: string, setting = DEFAULT_BEM_SETTIN
  * @param {string|object|string[]} bemValue 
  * @return {string[]} 
  */
-export function convertBemValueToArray(bemValue): string[] {
-    const type = typeof bemValue;
+export function convertBemValueToArray(bemValue: BemValue): string[] {
 
-    if(type === 'string'){
+    if (typeof bemValue === 'string') {
         return bemValue.split(' ');
     }
 
-    if(type === 'object'){
+    if (typeof bemValue === 'object') {
 
         if(bemValue === null){
             return [];
@@ -98,7 +98,10 @@ export function convertBemValueToArray(bemValue): string[] {
         }
 
         return Object.keys(bemValue)
-            .filter(key => typeof bemValue[key] === 'function' ? bemValue[key]() : bemValue[key]);
+            .filter(key => {
+                const value = bemValue[key];
+                return typeof value === 'function' ? value() : value;
+            });
     }
 
     return [];
@@ -109,7 +112,8 @@ export function convertBemValueToArray(bemValue): string[] {
  * @param {object} props 
  * @return {object}
  */
-export function cleanUpProps(props){
+type ObjectWithAnyValue = {[key: string]: any};
+export function cleanUpProps(props: ObjectWithAnyValue): ObjectWithAnyValue {
     props = {...props};
 
     delete props.bemName;

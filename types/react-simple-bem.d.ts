@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 declare module "react-simple-bem" {
     export const BemSetting: BemSettingComponent;
