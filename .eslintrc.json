@@ -8,13 +8,11 @@
 		"plugin:react/recommended"
 	],
 	"parserOptions": {
-		"ecmaFeatures": {
-			"experimentalObjectRestSpread": true,
-			"jsx": true
-		},
-		"sourceType": "module"
+		"sourceType": "module",
+		"ecmaVersion": 10
 	},
 	"plugins": [
+		"@typescript-eslint",
 		"react"
 	],
 	"rules": {
@@ -43,5 +41,42 @@
 		"react/jsx-uses-vars": [
 			"error"
 		]
-	}
+	},
+	"overrides": [
+		{
+			"files": [
+				"**/*.ts",
+				"**/*.tsx"
+			],
+			"parser": "@typescript-eslint/parser",
+			"parserOptions": {
+				"project": "./tsconfig.json",
+				"sourceType": "module",
+				"ecmaVersion": 10
+			},
+			"rules": {
+				"no-unused-vars": [
+					"off"
+				],
+				"no-undef": [
+					"off"
+				],
+				"@typescript-eslint/no-unused-vars": [
+					"error"
+				],
+				"@typescript-eslint/typedef": [
+					"error",
+					{
+						"parameter": false,
+						"arrowParameter": true,
+						"variableDeclaration": true,
+						"arrayDestructuring": true,
+						"memberVariableDeclaration": true,
+						"objectDestructuring": true,
+						"propertyDeclaration": true
+					}
+				]
+			}
+		}
+	]
 }

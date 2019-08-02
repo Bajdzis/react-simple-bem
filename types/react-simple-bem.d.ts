@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-declare module "react-simple-bem" {
+declare module 'react-simple-bem' {
     export const BemSetting: BemSettingComponent;
     export const BemStyles: BemStylesComponent;
     export const Block: BemDefaultComponent;

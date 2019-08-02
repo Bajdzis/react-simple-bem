@@ -1,10 +1,10 @@
 import * as PropTypes from 'prop-types'; 
-import { BemValue, BemInfo } from './domain';
+import { BemValue, BemInfo, BemSetting, BemValueInObject } from './domain';
 
 /**
  * Default setting
  */
-export const DEFAULT_BEM_SETTING = {
+export const DEFAULT_BEM_SETTING: BemSetting = {
     modifierDelimiter: '--',
     elementDelimiter: '__',
     bemIndicationElement: /:block\(([a-z]*)\)/gi,
@@ -19,14 +19,14 @@ export const DEFAULT_BEM_SETTING = {
  * @param {object} setting 
  * @return {string[]}
  */
-export function addModifiersToClassName(className: string, modifiers: string[] = [], setting = DEFAULT_BEM_SETTING): string[] {
-    const [block, element] = className.split(setting.elementDelimiter);
+export function addModifiersToClassName(className: string, modifiers: string[] = [], setting: BemSetting = DEFAULT_BEM_SETTING): string[] {
+    const [block, element]: string[] = className.split(setting.elementDelimiter);
 
-    const modifiersName = modifiers
-        .filter(modifier => typeof modifier === 'string' && modifier.length)
-        .map((modifier) => getStringBemInfo(modifier, setting))
-        .filter((bemModifierInfo) => checkBemInfoCondition(bemModifierInfo, block, element))
-        .map((bemModifierInfo) => `${className}${setting.modifierDelimiter}${bemModifierInfo.className}`);
+    const modifiersName: string[] = modifiers
+        .filter((modifier: string) => typeof modifier === 'string' && modifier.length)
+        .map((modifier: string) => getStringBemInfo(modifier, setting))
+        .filter((bemModifierInfo: BemInfo) => checkBemInfoCondition(bemModifierInfo, block, element))
+        .map((bemModifierInfo: BemInfo) => `${className}${setting.modifierDelimiter}${bemModifierInfo.className}`);
 
     return [className, ...modifiersName];
 }
@@ -54,19 +54,19 @@ export function checkBemInfoCondition(bemInfo: BemInfo, block: string, element: 
  * @param {object} setting 
  * @return {object}
  */
-export function getStringBemInfo(className: string, setting = DEFAULT_BEM_SETTING): BemInfo {
-    const blocksName = [];
-    const elementsName = [];
-    const [onlyClassName] = className.split(setting.bemIndicationSeparator);
-    let match;
+export function getStringBemInfo(className: string, setting: BemSetting = DEFAULT_BEM_SETTING): BemInfo {
+    const blocksName: string[] = [];
+    const elementsName: string[] = [];
+    const [onlyClassName]: string[] = className.split(setting.bemIndicationSeparator);
+    let match: RegExpExecArray;
     // eslint-disable-next-line no-cond-assign
     while (match = setting.bemIndicationElement.exec(className)) {
-        const [, blockName] = match;
+        const [, blockName]: RegExpExecArray = match;
         blocksName.push(blockName);
     }
     // eslint-disable-next-line no-cond-assign
     while (match = setting.bemIndicationMod.exec(className)) {
-        const [, elementName] = match;
+        const [, elementName]: RegExpExecArray = match;
         elementsName.push(elementName);
     }
     return {
@@ -98,8 +98,8 @@ export function convertBemValueToArray(bemValue: BemValue): string[] {
         }
 
         return Object.keys(bemValue)
-            .filter(key => {
-                const value = bemValue[key];
+            .filter((key: string) => {
+                const value: BemValueInObject = bemValue[key];
                 return typeof value === 'function' ? value() : value;
             });
     }
@@ -127,7 +127,7 @@ export function cleanUpProps(props: ObjectWithAnyValue): ObjectWithAnyValue {
 /**
  * Validator for bem value
  */
-export const PropTypesBemValue = PropTypes.oneOfType([
+export const PropTypesBemValue: any = PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.arrayOf(PropTypes.string),
     PropTypes.object
@@ -136,7 +136,7 @@ export const PropTypesBemValue = PropTypes.oneOfType([
 /**
  * Validator for bem setting
  */
-export const PropTypesBemSetting = PropTypes.shape({
+export const PropTypesBemSetting: any = PropTypes.shape({
     elementDelimiter: PropTypes.string,
     modifierDelimiter: PropTypes.string,
     bemIndicationElement: PropTypes.object,//regex

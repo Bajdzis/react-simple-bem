@@ -9,7 +9,7 @@
     "test": "jasmine",
     "test:coverage": "cross-env NODE_ENV=coverage nyc jasmine",
     "coveralls": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js",
-    "lint": "eslint ./ --ignore-pattern \"lib/\"",
+    "lint": "eslint ./ --ext .js,.ts,.tsx --ignore-pattern \"lib/\"",
     "prepare": "tsc",
     "prepublish": "npm test"
   },
@@ -56,6 +56,8 @@
   "devDependencies": {
     "@types/prop-types": "^15.7.1",
     "@types/react": "^16.8.24",
+    "@typescript-eslint/eslint-plugin": "^2.0.0-alpha.4",
+    "@typescript-eslint/parser": "^2.0.0-alpha.4",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-plugin-istanbul": "^5.1.0",
