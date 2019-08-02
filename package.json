@@ -15,6 +15,7 @@
   },
   "nyc": {
     "require": [
+      "ts-node/register",
       "babel-core/register"
     ],
     "include": [
