@@ -55,10 +55,12 @@
     "react": "^16.0.0"
   },
   "devDependencies": {
+    "@types/enzyme": "^3.10.3",
+    "@types/jasmine": "^3.4.0",
     "@types/prop-types": "^15.7.1",
     "@types/react": "^16.8.24",
-    "@typescript-eslint/eslint-plugin": "^2.0.0-alpha.4",
-    "@typescript-eslint/parser": "^2.0.0-alpha.4",
+    "@typescript-eslint/eslint-plugin": "^2.0.1-alpha.15",
+    "@typescript-eslint/parser": "^2.0.1-alpha.15",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-plugin-istanbul": "^5.1.0",
