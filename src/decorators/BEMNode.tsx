@@ -4,7 +4,7 @@ import { addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, Pro
 import { BemValue } from '../domain';
 import { BemSetting } from '../..';
 
-interface BEMNodeProps {
+export interface BEMNodeProps {
     bemName: BemValue,
     bemMod: BemValue,
     bemBlock: BemValue,
@@ -13,7 +13,7 @@ interface BEMNodeProps {
     forwardedRef: () => HTMLElement | null;
 }
 
-interface BEMNodeContext {
+export interface BEMNodeContext {
     BEM_BlockNames: string[],
     BEM_StylesObject: {[key:string]: string},
     BEM_Setting: BemSetting,
