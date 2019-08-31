@@ -1,13 +1,10 @@
 {
   "spec_dir": "spec",
   "spec_files": [
-    "**/*[sS]pec.js",
     "**/*[sS]pec.ts",
     "**/*[sS]pec.tsx"
   ],
   "helpers": [
-    "helpers/type-script.js",
-    "helpers/babel.js",
     "helpers/enzyme.js",
     "helpers/jsdom.js",
     "helpers/**/*.js"

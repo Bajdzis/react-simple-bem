@@ -1,5 +1,14 @@
 {
     "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": "./lib",
+        "target": "es6",
+        "noImplicitAny": true,
+        "jsx": "react",
+        "declaration": true,
+        "declarationDir": "types",
+        "declarationMap": false
+    },
     "include": [
         "@types/jasmine",
         "./**/*"
