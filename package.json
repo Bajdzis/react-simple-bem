@@ -1,15 +1,15 @@
 {
   "name": "react-simple-bem",
-  "version": "1.5.2",
+  "version": "1.6.0",
   "description": "Library for easier use of BEM methodology in React JS",
   "main": "lib/index.js",
-  "types": "types/react-simple-bem.d.ts",
-  "typings": "types/react-simple-bem.d.ts",
+  "types": "types/index.d.ts",
+  "typings": "types/index.d.ts",
   "scripts": {
     "test": "jasmine",
     "test:coverage": "cross-env NODE_ENV=coverage nyc jasmine",
     "coveralls": "nyc report --reporter=text-lcov | ./node_modules/coveralls/bin/coveralls.js",
-    "lint": "eslint ./ --ext .js,.ts,.tsx --ignore-pattern \"lib/\"",
+    "lint": "eslint ./ --ext .ts,.tsx ",
     "prepare": "tsc",
     "prepublish": "npm test"
   },

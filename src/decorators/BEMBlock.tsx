@@ -2,7 +2,7 @@ import * as PropTypes from 'prop-types';
 import { convertBemValueToArray} from '../helpers';
 import { BEMNode } from './BEMNode';
 
-interface BEMBlockContext {
+export interface BEMBlockContext {
     BEM_BlockNames: string[];
 }
 

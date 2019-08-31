@@ -1,8 +1,7 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types'; 
 import { addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, PropTypesBemSetting, DEFAULT_BEM_SETTING, cleanUpProps} from '../helpers';
-import { BemValue } from '../domain';
-import { BemSetting } from '../..';
+import { BemValue, BemSetting } from '../domain';
 
 export interface BEMNodeProps {
     bemName: BemValue,

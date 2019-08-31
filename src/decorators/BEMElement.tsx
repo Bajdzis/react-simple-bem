@@ -1,7 +1,6 @@
 import { convertBemValueToArray, getStringBemInfo, checkBemInfoCondition } from '../helpers';
 import { BEMNode, BEMNodeProps, BEMNodeContext } from './BEMNode';
-import { BemSetting } from '../..';
-import { BemInfo } from '../domain';
+import { BemInfo, BemSetting } from '../domain';
 
 export class BEMElement extends BEMNode {
 
