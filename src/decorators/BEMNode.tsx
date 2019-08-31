@@ -5,11 +5,12 @@ import { BemValue, BemSetting } from '../domain';
 
 export interface BEMNodeProps {
     bemName: BemValue,
-    bemMod: BemValue,
-    bemBlock: BemValue,
-    className: string,
-    children: React.ReactNode,
-    forwardedRef: () => HTMLElement | null;
+    bemMod?: BemValue,
+    bemBlock?: BemValue,
+    className?: string,
+    children?: React.ReactNode,
+    forwardedRef?: () => HTMLElement | null;
+    [key: string]: any
 }
 
 export interface BEMNodeContext {
@@ -79,8 +80,9 @@ export class BEMNode extends React.Component<BEMNodeProps, {}, BEMNodeContext>{
         return classNames.map((className: string) => this.context.BEM_StylesObject[className] || className);
     }
     
-    // @ts-ignore
-    render(Component: typeof React.Component) {
+    render(): React.ReactNode {
+        // @ts-ignore
+        const Component: typeof React.Component = arguments[0] as typeof React.Component;
         const className: string = this.replaceModulesStyles(this.getClassName()).join(' ');
         const {forwardedRef, ...props}: BEMNodeProps =  this.props;
         return (

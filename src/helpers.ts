@@ -1,5 +1,6 @@
 import * as PropTypes from 'prop-types'; 
 import { BemValue, BemInfo, BemSetting, BemValueInObject } from './domain';
+import { BEMNodeProps } from './decorators/BEMNode';
 
 /**
  * Default setting
@@ -113,7 +114,7 @@ export function convertBemValueToArray(bemValue: BemValue): string[] {
  * @return {object}
  */
 type ObjectWithAnyValue = {[key: string]: any};
-export function cleanUpProps(props: ObjectWithAnyValue): ObjectWithAnyValue {
+export function cleanUpProps(props: Partial<BEMNodeProps> & ObjectWithAnyValue): ObjectWithAnyValue {
     props = {...props};
 
     delete props.bemName;

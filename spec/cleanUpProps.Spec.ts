@@ -2,15 +2,16 @@
 /* global describe, it, expect */
 
 import {cleanUpProps} from '../src/helpers';
+import { BEMNodeProps } from '../types/src/decorators/BEMNode';
 
 describe('Test cleanUpProps function', function() {
 
     it('must return new object with values', function() {
-        const props = {
+        const props: {[key: string]: any} = {
             some: 'props'
         };
 
-        const cleanProps = cleanUpProps(props);
+        const cleanProps: {[key: string]: any} = cleanUpProps(props);
 
         expect(props).not.toBe(cleanProps);
         expect(props).toEqual({some: 'props'});
@@ -18,7 +19,7 @@ describe('Test cleanUpProps function', function() {
     });
 
     it('must delete bem lib props', function() {
-        const props = {
+        const props: Partial<BEMNodeProps> & {[key: string]: any} = {
             some: 'props',
             bemName: 'block',
             bemMod: [],
@@ -26,8 +27,8 @@ describe('Test cleanUpProps function', function() {
             bemBlock: 'overwrite'
         };
 
-        const cleanProps = cleanUpProps(props);
-        const keys = Object.keys(cleanProps);
+        const cleanProps: {[key: string]: any} = cleanUpProps(props);
+        const keys: string[] = Object.keys(cleanProps);
 
         expect(keys).toContain('some');
         expect(keys).not.toContain('bemName');
