@@ -9,7 +9,7 @@ export interface BEMNodeProps {
     bemBlock?: BemValue,
     className?: string,
     children?: React.ReactNode,
-    forwardedRef?: () => HTMLElement | null;
+    forwardedRef?: (ref: HTMLElement | null) => void;
     [key: string]: any
 }
 

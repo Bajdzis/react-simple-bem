@@ -1,12 +1,11 @@
-/* global describe, it, expect */
-import React from 'react';
-import {shallow, mount} from 'enzyme';
+import * as React from 'react';
+import {shallow, mount, ShallowWrapper, ReactWrapper} from 'enzyme';
 import {Block} from '../index';
 
 describe('Test Block Component', function() {
 
     it('must render correct className and default tagName', function() {
-        const wrapper = mount(<Block bemName="header"/>);
+        const wrapper: ReactWrapper = mount(<Block bemName="header"/>);
 
         expect(wrapper.getDOMNode().className).toEqual('header');
         expect(wrapper.getDOMNode().tagName).toEqual('DIV');
@@ -14,14 +13,14 @@ describe('Test Block Component', function() {
     });
 
     it('must render additional className without BEM methodology', function() {
-        const wrapper = shallow(<Block bemName="header" className="not-bem-class"/>);
+        const wrapper: ShallowWrapper = shallow(<Block bemName="header" className="not-bem-class"/>);
 
         expect(wrapper).toHaveClassName('header');
         expect(wrapper).toHaveClassName('not-bem-class');
     });
 
     it('must render custom tagName', function() {
-        const wrapper = mount(<Block bemName="header" tagName="span"/>);
+        const wrapper: ReactWrapper = mount(<Block bemName="header" tagName="span"/>);
 
         expect(wrapper.getDOMNode().className).toEqual('header');
         expect(wrapper.getDOMNode().tagName).toEqual('SPAN');
@@ -29,25 +28,26 @@ describe('Test Block Component', function() {
     });
 
     it('must render className with modifiers', function() {
-        const wrapper = shallow(<Block bemName="header" bemMod="dark big"/>);
+        const wrapper: ShallowWrapper = shallow(<Block bemName="header" bemMod="dark big"/>);
 
         expect(wrapper).toHaveClassName('header header--dark header--big');
     });
 
     it('must generate correct mixed modifiers classNames', function () {
-        const blockNames = 'header nav';
-        const elements = ['dark:block(header)', 'focus:block(nav)', 'common:block(header):block(nav)'];
+        const blockNames: string = 'header nav';
+        const elements: string[] = ['dark:block(header)', 'focus:block(nav)', 'common:block(header):block(nav)'];
 
-        const wrapper = mount(<Block id="element_logo" bemName={blockNames} bemMod={elements}></Block>);
+        const wrapper: ReactWrapper = mount(<Block id="element_logo" bemName={blockNames} bemMod={elements}></Block>);
 
         expect(wrapper.find('div#element_logo')).toHaveClassName('header--dark nav--focus header--common nav--common');
         expect(wrapper.find('div#element_logo')).not.toHaveClassName('nav--dark header--focus');
     });
 
     it('must return DOM node element in forwardedRef callback', function () {
-        let DOMElement = null;
-        mount(<Block forwardedRef={(ref) => DOMElement = ref} ></Block>);
+        let DOMElement: HTMLElement = null;
+        mount(<Block bemName="" forwardedRef={(ref:HTMLElement) => { DOMElement = ref; }} />);
     
+        // @ts-ignore
         expect(DOMElement.constructor.name).toEqual('HTMLDivElement');
     });
 
