@@ -1,14 +1,15 @@
-/* global describe, it, expect */
-import React from 'react';
-import { mount } from 'enzyme';
+import * as React from 'react';
+import { mount, ReactWrapper } from 'enzyme';
 import { Block, Element } from '../index';
- 
-const clearWhiteSpace = (text) => text.replace(/\s/g, '');
 
 describe('Output html', function() {
 
+    function clearWhiteSpace (text: string): string {
+        return text.replace(/\s/g, '');
+    }
+
     it('no have redundant elements', function() {
-        const elem = mount(<Block bemName="header">
+        const elem: ReactWrapper = mount(<Block bemName="header">
             <Element bemName="button"/>
             <Element bemName="nav" tagName="nav">
                 <Element bemName="link" tagName="a"/>
@@ -16,8 +17,8 @@ describe('Output html', function() {
             </Element>
         </Block>);
     
-        const html = clearWhiteSpace(elem.html());
-        const expectHtml = clearWhiteSpace(`<div class="header">
+        const html: string = clearWhiteSpace(elem.html());
+        const expectHtml: string = clearWhiteSpace(`<div class="header">
             <div class="header__button"></div>
             <nav class="header__nav">
                 <a class="header__link"></a>

@@ -2,7 +2,7 @@
 /* global describe, it, expect */
 
 import {cleanUpProps} from '../src/helpers';
-import { BEMNodeProps } from '../types/src/decorators/BEMNode';
+import { BEMNodeProps } from '../src/decorators/BEMNode';
 
 describe('Test cleanUpProps function', function() {
 

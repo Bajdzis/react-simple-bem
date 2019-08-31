@@ -1,20 +1,23 @@
-
-/* global describe, it, expect */
-
 import {convertBemValueToArray} from '../src/helpers';
+import { BemValue } from '../src/domain';
 
 describe('Test convertBemValueToArray function', function() {
 
     it('must return itself array if you pass an array', function() {
-        const bemValue = ['some', 'name'];
+        const bemValue: string[] = ['some', 'name'];
 
-        const names = convertBemValueToArray(bemValue);
+        const names: string[] = convertBemValueToArray(bemValue);
 
         expect(names).toBe(bemValue);
     });
 
     it('must always return array with strings', function() {
-        const validBemValues = [
+        type TestBemValues = {
+            test:  BemValue,
+            expect: string[]
+        };
+
+        const validBemValues: Array<TestBemValues> = [
             {
                 test: 'some-name',
                 expect: ['some-name']
@@ -32,7 +35,7 @@ describe('Test convertBemValueToArray function', function() {
                     empty: '',
                     zero: 0,
                     one: 1
-                },
+                } as any as BemValue,
                 expect: ['some', 'valid', 'one']
             },
             {
@@ -44,17 +47,18 @@ describe('Test convertBemValueToArray function', function() {
             }
         ];
 
-        validBemValues.forEach(value => {
-            const names = convertBemValueToArray(value.test);
+        validBemValues.forEach((value:TestBemValues) => {
+            const names: string[] = convertBemValueToArray(value.test);
             expect(names).toEqual(value.expect);
         });
     });
 
     it('must return empty array on invalid type', function() {
-        const invalidBemValues = [true, false, 0, null, undefined];
+        // @ts-ignore
+        const invalidBemValues: BemValue[] = [true, false, 0, null, undefined];
 
-        invalidBemValues.forEach(value => {
-            const names = convertBemValueToArray(value);
+        invalidBemValues.forEach((value: BemValue) => {
+            const names: string[] = convertBemValueToArray(value);
             expect(names).toEqual([]);
         });
     });

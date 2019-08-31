@@ -2,7 +2,7 @@ import * as React from 'react';
 import { BEMElement } from './BEMElement';
 import { BEMBlock } from './BEMBlock';
 
-export function bemBlockDecorator (Component: typeof React.Component) {
+export function bemBlockDecorator (Component: React.ElementType) {
     return (
         class BemDecoratorComponent extends BEMBlock {
             render() {
@@ -13,7 +13,7 @@ export function bemBlockDecorator (Component: typeof React.Component) {
     );
 }
 
-export function bemElementDecorator (Component: typeof React.Component) {
+export function bemElementDecorator (Component: React.ElementType) {
     return(
         class BemDecoratorComponent extends BEMElement {
             render() {

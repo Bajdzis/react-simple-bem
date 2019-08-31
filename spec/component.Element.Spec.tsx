@@ -1,12 +1,11 @@
-/* global describe, it, expect */
-import React from 'react';
-import { mount } from 'enzyme';
+import * as React from 'react';
+import { mount, ReactWrapper } from 'enzyme';
 import {Block, Element} from '../index';
 
 describe('Test Element Component', function() {
 
     it('must retrieves block name', function() {
-        const wrapper = mount(<Block bemName="header">
+        const wrapper: ReactWrapper = mount(<Block bemName="header">
             <Element id="element_logo" bemName="logo"/>
         </Block>);
 
@@ -14,7 +13,7 @@ describe('Test Element Component', function() {
     });
 
     it('must render additional className without BEM methodology', function() {
-        const wrapper = mount(<Block bemName="header">
+        const wrapper: ReactWrapper = mount(<Block bemName="header">
             <Element id="element_logo" bemName="logo" className="not-bem-class"/>
         </Block>);
 
@@ -23,7 +22,7 @@ describe('Test Element Component', function() {
     });
 
     it('must be able to overwrite block name', function() {
-        const wrapper = mount(<Block bemName="header">
+        const wrapper: ReactWrapper = mount(<Block bemName="header">
             <Element id="element_logo" bemName="logo" bemBlock="other-block"/>
         </Block>);
 
@@ -31,7 +30,7 @@ describe('Test Element Component', function() {
     });
 
     it('must be generate elementName by multi blockName', function () {
-        const wrapper = mount(<Block bemName="header nav">
+        const wrapper: ReactWrapper = mount(<Block bemName="header nav">
             <Element id="element_logo" bemName="logo" />
         </Block>);
 
@@ -39,10 +38,10 @@ describe('Test Element Component', function() {
     });
 
     it('must generate correct mixed modifiers classNames', function () {
-        const blockNames = 'header nav';
-        const mods = ['menu:block(header)', 'element:block(nav)', 'common:block(header):block(nav)'];
+        const blockNames: string = 'header nav';
+        const mods: string[] = ['menu:block(header)', 'element:block(nav)', 'common:block(header):block(nav)'];
 
-        const wrapper = mount(<Block bemName={blockNames} >
+        const wrapper: ReactWrapper = mount(<Block bemName={blockNames} >
             <Element id="element_logo" bemName="link" bemMod={mods}/>
         </Block>);
 
@@ -51,10 +50,10 @@ describe('Test Element Component', function() {
     });
 
     it('must generate correct mixed elements classNames', function () {
-        const blockNames = 'header nav';
-        const elements = ['menu:block(header)', 'element:block(nav)', 'common:block(header):block(nav)'];
+        const blockNames: string = 'header nav';
+        const elements: string[] = ['menu:block(header)', 'element:block(nav)', 'common:block(header):block(nav)'];
 
-        const wrapper = mount(<Block bemName={blockNames} >
+        const wrapper: ReactWrapper = mount(<Block bemName={blockNames} >
             <Element id="element_logo" bemName={elements}/>
         </Block>);
 
@@ -63,9 +62,9 @@ describe('Test Element Component', function() {
     });
 
     it('must generate correct mixed modifiers classNames', function () {
-        const mods = ['hover:element(link)', 'primary:element(button)', 'disable:block(header):element(button)'];
+        const mods: string[] = ['hover:element(link)', 'primary:element(button)', 'disable:block(header):element(button)'];
 
-        const wrapper = mount(<Block bemName="header nav">
+        const wrapper: ReactWrapper = mount(<Block bemName="header nav">
             <Element id="element_logo" bemName="link button" bemMod={mods}/>
         </Block>);
 
@@ -74,11 +73,12 @@ describe('Test Element Component', function() {
     });
 
     it('must return DOM node element in forwardedRef callback', function () {
-        let DOMElement = null;
+        let DOMElement: HTMLElement = null;
         mount(<Block bemName="header">
-            <Element forwardedRef={(ref) => DOMElement = ref} bemName="button"/>
+            <Element forwardedRef={(ref: HTMLElement) => { DOMElement = ref; }} bemName="button"/>
         </Block>);
     
+        // @ts-ignore
         expect(DOMElement.constructor.name).toEqual('HTMLDivElement');
     });
 

@@ -82,7 +82,7 @@ export class BEMNode extends React.Component<BEMNodeProps, {}, BEMNodeContext>{
     
     render(): React.ReactNode {
         // @ts-ignore
-        const Component: typeof React.Component = arguments[0] as typeof React.Component;
+        const Component: React.ElementType = arguments[0] as React.ElementType;
         const className: string = this.replaceModulesStyles(this.getClassName()).join(' ');
         const {forwardedRef, ...props}: BEMNodeProps =  this.props;
         return (
