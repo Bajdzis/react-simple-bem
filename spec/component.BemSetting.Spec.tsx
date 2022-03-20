@@ -1,13 +1,14 @@
 import * as React from 'react';
 import {mount, ReactWrapper} from 'enzyme';
 import {Block, Element, BemSetting} from '../index';
+import { BemSettingI } from '../src/domain';
 
 describe('Test BemSetting Component', function() {
 
     it('must change only modifier delimiter', function() {
-        const setting: BemSetting = {
+        const setting: Partial<BemSettingI> = {
             modifierDelimiter: '_M-'
-        } as Partial<BemSetting> as BemSetting;
+        };
 
         const wrapper: ReactWrapper = mount(<BemSetting bemSetting={setting}>
             <Block id="block_header" bemName="header" bemMod="mod">
@@ -22,9 +23,9 @@ describe('Test BemSetting Component', function() {
     });
 
     it('must change only element delimiter', function() {
-        const setting:BemSetting = {
+        const setting: Partial<BemSettingI> = {
             elementDelimiter: '_E-'
-        } as Partial<BemSetting> as BemSetting;
+        };
 
         const wrapper: ReactWrapper = mount(<BemSetting bemSetting={setting}>
             <Block id="block_header" bemName="header" bemMod="mod">
@@ -40,10 +41,10 @@ describe('Test BemSetting Component', function() {
     it('must support nesting BemSetting Component', function() {
         const wrapper: ReactWrapper = mount(<BemSetting bemSetting={{
             elementDelimiter: '_E-'
-        }as Partial<BemSetting> as BemSetting}>
+        }}>
             <BemSetting bemSetting={{
                 modifierDelimiter: '_M-'
-            }as Partial<BemSetting> as BemSetting}>
+            }}>
                 <Block id="block_header" bemName="header" bemMod="mod">
                     <Element id="element_menu" bemName="menu" bemMod="mod"/>
                 </Block>

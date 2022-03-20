@@ -15,8 +15,7 @@ describe('Test Block Component', function() {
     it('must render additional className without BEM methodology', function() {
         const wrapper: ShallowWrapper = shallow(<Block bemName="header" className="not-bem-class"/>);
 
-        expect(wrapper).toHaveClassName('header');
-        expect(wrapper).toHaveClassName('not-bem-class');
+        expect(wrapper.html()).toEqual('<div class="header not-bem-class"></div>');
     });
 
     it('must render custom tagName', function() {
@@ -30,7 +29,7 @@ describe('Test Block Component', function() {
     it('must render className with modifiers', function() {
         const wrapper: ShallowWrapper = shallow(<Block bemName="header" bemMod="dark big"/>);
 
-        expect(wrapper).toHaveClassName('header header--dark header--big');
+        expect(wrapper.html()).toEqual('<div class="header header--dark header--big"></div>');
     });
 
     it('must generate correct mixed modifiers classNames', function () {
@@ -46,7 +45,7 @@ describe('Test Block Component', function() {
     it('must return DOM node element in forwardedRef callback', function () {
         let DOMElement: HTMLElement = null;
         mount(<Block bemName="" forwardedRef={(ref:HTMLElement) => { DOMElement = ref; }} />);
-    
+
         // @ts-ignore
         expect(DOMElement.constructor.name).toEqual('HTMLDivElement');
     });

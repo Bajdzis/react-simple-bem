@@ -1,7 +1,7 @@
 import * as React from 'react';
-import * as PropTypes from 'prop-types'; 
-import { addModifiersToClassName, convertBemValueToArray, PropTypesBemValue, PropTypesBemSetting, DEFAULT_BEM_SETTING, cleanUpProps} from '../helpers';
-import { BemValue, BemSetting } from '../domain';
+import { addModifiersToClassName, convertBemValueToArray, cleanUpProps} from '../helpers';
+import { BemValue, BemSettingI } from '../domain';
+import {  BEMSettingContext, BEMStyleContext } from '../context/settings';
 
 export interface BEMNodeProps {
     bemName: BemValue,
@@ -10,88 +10,52 @@ export interface BEMNodeProps {
     className?: string,
     children?: React.ReactNode,
     forwardedRef?: (ref: HTMLElement | null) => void;
-    [key: string]: any
+    [key: string]: any;
+    getNames?: (() => string[]) | undefined;
 }
 
-export interface BEMNodeContext {
+export interface BEMNodeContextI {
     BEM_BlockNames: string[],
-    BEM_StylesObject: {[key:string]: string},
-    BEM_Setting: BemSetting,
 }
 
-export class BEMNode extends React.Component<BEMNodeProps, {}, BEMNodeContext>{
+export interface BEMStyleContextI {
+    BEM_StylesObject: {[key:string]: string} | null,
+}
 
-    static defaultProps: Partial<BEMNodeProps> = {
-        bemName: [],
-        bemMod: [],
-        className: '',
-        bemBlock: null
-    };
-    
-    static propTypes: {[key in keyof BEMNodeProps]: PropTypes.Requireable<any>} = {
-        bemName: PropTypesBemValue,
-        bemMod: PropTypesBemValue,
-        bemBlock: PropTypesBemValue,
-        className: PropTypes.string,
-        children: PropTypes.any,
-        forwardedRef: PropTypes.func,
-    };
-    
-    static contextTypes: {[key in keyof BEMNodeContext]: PropTypes.Requireable<any>} = {
-        BEM_BlockNames: PropTypes.arrayOf(PropTypes.string),
-        BEM_StylesObject: PropTypes.object,
-        BEM_Setting: PropTypesBemSetting,
-    };
+export const BEMNodeCreator: (Component: React.ElementType) => React.FC<BEMNodeProps> = (Component: React.ElementType) => function BEMNode ({forwardedRef, getNames,  ...props}:BEMNodeProps) {
+    const setting:BemSettingI = React.useContext(BEMSettingContext);
+    const { BEM_StylesObject }:BEMStyleContextI = React.useContext(BEMStyleContext);
 
-    getMods(): string[] {
-        return convertBemValueToArray(this.props.bemMod);
+    function getMods(): string[] {
+        return convertBemValueToArray(props.bemMod);
     }
 
-    getNames(): string[] {
-        throw new Error('getNames not implement');
-    }
-
-    getClassName(): string[] {
-        const names: string[] = this.getNames();
-        const mods: string[] = this.getMods();
-        const setting: BemSetting = this.getBemSetting();
+    function getClassName(setting: BemSettingI): string[] {
+        if(!getNames){
+            throw new Error('getNames not implement');
+        }
+        const names: string[] = getNames();
+        const mods: string[] = getMods();
         const classNames: string[] = [];
         names.forEach((name: string) => classNames.push(...addModifiersToClassName(name, mods, setting)));
-        if(this.props.className){
-            classNames.push(this.props.className);
+        if(props.className){
+            classNames.push(props.className);
         }
         return classNames;
     }
 
-    getBemSetting(): BemSetting{
-        if(!this.context.BEM_Setting){
-            return DEFAULT_BEM_SETTING;
-        }
-        return {
-            ...DEFAULT_BEM_SETTING,
-            ...this.context.BEM_Setting
-        };
-    }
-
-    replaceModulesStyles(classNames: string[]): string[]{
-        if(!this.context.BEM_StylesObject){
+    function replaceModulesStyles(classNames: string[]): string[]{
+        if(!BEM_StylesObject){
             return classNames;
         }
-        return classNames.map((className: string) => this.context.BEM_StylesObject[className] || className);
-    }
-    
-    render(): React.ReactNode {
-        // @ts-ignore
-        const Component: React.ElementType = arguments[0] as React.ElementType;
-        const className: string = this.replaceModulesStyles(this.getClassName()).join(' ');
-        const {forwardedRef, ...props}: BEMNodeProps =  this.props;
-        return (
-            <Component className={className} forwardedRef={forwardedRef} {...cleanUpProps(props)}>
-                {this.props.children}
-            </Component>
-        );
+        return classNames.map((className: string) => BEM_StylesObject[className] || className);
     }
 
-}
+    const className: string = replaceModulesStyles(getClassName(setting)).join(' ');
 
-
+    return (
+        <Component className={className} forwardedRef={forwardedRef} {...cleanUpProps(props)}>
+            {props.children}
+        </Component>
+    );
+};

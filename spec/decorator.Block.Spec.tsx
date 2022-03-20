@@ -1,18 +1,17 @@
 import * as React from 'react';
 import {mount, ReactWrapper} from 'enzyme';
 import {Element, bemBlockDecorator} from '../index';
-import {BEMBlock} from '../src/decorators/BEMBlock';
+import { BEMNodeProps } from '../src/decorators/BEMNode';
 
 const DEFAULT_TAG_NAME: string = 'div';
 
 function CustomComponent(props: {className : string}): React.ReactElement {
-    // eslint-disable-next-line react/prop-types
     return <h1 className={props.className}>
         <Element bemName="icon" />
     </h1>;
 }
 
-const BemCustomComponent: typeof BEMBlock = bemBlockDecorator(CustomComponent);
+const BemCustomComponent: React.FC<BEMNodeProps> = bemBlockDecorator(CustomComponent);
 
 describe('Test Block decorator', function() {
 

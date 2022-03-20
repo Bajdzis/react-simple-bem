@@ -1,11 +1,10 @@
-import * as PropTypes from 'prop-types'; 
-import { BemValue, BemInfo, BemSetting, BemValueInObject } from './domain';
+import { BemValue, BemInfo, BemSettingI, BemValueInObject } from './domain';
 import { BEMNodeProps } from './decorators/BEMNode';
 
 /**
  * Default setting
  */
-export const DEFAULT_BEM_SETTING: BemSetting = {
+export const DEFAULT_BEM_SETTING: BemSettingI = {
     modifierDelimiter: '--',
     elementDelimiter: '__',
     bemIndicationElement: /:block\(([a-z]*)\)/gi,
@@ -15,12 +14,12 @@ export const DEFAULT_BEM_SETTING: BemSetting = {
 
 /**
  * Create class name with modifiers
- * @param {string} className 
- * @param {string[]} modifiers 
- * @param {object} setting 
+ * @param {string} className
+ * @param {string[]} modifiers
+ * @param {object} setting
  * @return {string[]}
  */
-export function addModifiersToClassName(className: string, modifiers: string[] = [], setting: BemSetting = DEFAULT_BEM_SETTING): string[] {
+export function addModifiersToClassName(className: string, modifiers: string[] = [], setting: BemSettingI = DEFAULT_BEM_SETTING): string[] {
     const [block, element]: string[] = className.split(setting.elementDelimiter);
 
     const modifiersName: string[] = modifiers
@@ -51,11 +50,11 @@ export function checkBemInfoCondition(bemInfo: BemInfo, block: string, element: 
 }
 /**
  * Create class name with modifiers
- * @param {string} className 
- * @param {object} setting 
+ * @param {string} className
+ * @param {object} setting
  * @return {object}
  */
-export function getStringBemInfo(className: string, setting: BemSetting = DEFAULT_BEM_SETTING): BemInfo {
+export function getStringBemInfo(className: string, setting: BemSettingI = DEFAULT_BEM_SETTING): BemInfo {
     const blocksName: string[] = [];
     const elementsName: string[] = [];
     const [onlyClassName]: string[] = className.split(setting.bemIndicationSeparator);
@@ -79,8 +78,8 @@ export function getStringBemInfo(className: string, setting: BemSetting = DEFAUL
 /**
  * Converts many possible values to one format.
  * return empty array if bemValue is invalid
- * @param {string|object|string[]} bemValue 
- * @return {string[]} 
+ * @param {string|object|string[]} bemValue
+ * @return {string[]}
  */
 export function convertBemValueToArray(bemValue: BemValue): string[] {
 
@@ -110,7 +109,7 @@ export function convertBemValueToArray(bemValue: BemValue): string[] {
 
 /**
  * Delete from props many key before add to Html Element
- * @param {object} props 
+ * @param {object} props
  * @return {object}
  */
 type ObjectWithAnyValue = {[key: string]: any};
@@ -124,24 +123,3 @@ export function cleanUpProps(props: Partial<BEMNodeProps> & ObjectWithAnyValue):
 
     return props;
 }
-
-/**
- * Validator for bem value
- */
-export const PropTypesBemValue: any = PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.arrayOf(PropTypes.string),
-    PropTypes.object
-]);
-
-/**
- * Validator for bem setting
- */
-export const PropTypesBemSetting: any = PropTypes.shape({
-    elementDelimiter: PropTypes.string,
-    modifierDelimiter: PropTypes.string,
-    bemIndicationElement: PropTypes.object,//regex
-    bemIndicationMod: PropTypes.object,//regex
-    bemIndicationSeparator: PropTypes.string
-});
-

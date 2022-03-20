@@ -36,7 +36,7 @@
 			"always"
 		],
 		"react/prop-types": [
-			"error"
+			0
 		],
 		"react/jsx-uses-vars": [
 			"error"

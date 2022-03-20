@@ -1,25 +1,26 @@
-import * as PropTypes from 'prop-types'; 
+import * as React from 'react';
+import { BEMNodeContext } from '../context/settings';
 import { convertBemValueToArray} from '../helpers';
-import { BEMNode } from './BEMNode';
+import { BEMNodeCreator, BEMNodeContextI, BEMNodeProps } from './BEMNode';
 
 export interface BEMBlockContext {
     BEM_BlockNames: string[];
 }
 
-export class BEMBlock extends BEMNode {
+export const BEMBlockCreator: (Component: React.ElementType) => React.FC<BEMNodeProps> = (Component: React.ElementType) =>  {
 
-    static childContextTypes: {[key in keyof BEMBlockContext]: PropTypes.Requireable<any>} = {
-        BEM_BlockNames: PropTypes.arrayOf(PropTypes.string),
+    const BEMNode:React.FC<BEMNodeProps> = BEMNodeCreator(Component);
+
+    const BEMBlock: React.FC<BEMNodeProps> = (props: BEMNodeProps) => {
+        const oldContext:BEMNodeContextI = React.useContext(BEMNodeContext);
+
+        return <BEMNodeContext.Provider value={{
+            ...oldContext,
+            BEM_BlockNames:convertBemValueToArray(props.bemName)
+        }}>
+            <BEMNode getNames={() => convertBemValueToArray(props.bemName)} {...props}></BEMNode>
+        </BEMNodeContext.Provider>;
     };
 
-    getChildContext(): BEMBlockContext {
-        return {
-            BEM_BlockNames: this.getNames(),
-        };
-    }
-
-    getNames(): string[] {
-        return convertBemValueToArray(this.props.bemName);
-    }
-
-}
+    return BEMBlock;
+};

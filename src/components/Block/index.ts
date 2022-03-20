@@ -1,5 +1,5 @@
-import {bemBlockDecorator} from '../../decorators';
 import {Tag} from '../Tag';
-import { BEMBlock } from '../../decorators/BEMBlock';
+import { BEMBlockCreator } from '../../decorators/BEMBlock';
+import { BEMNodeProps } from '../../decorators/BEMNode';
 
-export const Block: typeof BEMBlock = bemBlockDecorator(Tag); 
+export const Block: React.FC<BEMNodeProps> = BEMBlockCreator(Tag);
