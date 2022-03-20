@@ -8,9 +8,9 @@ interface BemStylesProps {
 
 const BemStyles: React.FC<BemStylesProps> = ({ styles, children }:BemStylesProps) =>{
 
-    return <BEMStyleContext.Provider value={{
-        BEM_StylesObject: styles
-    }}>{children}</BEMStyleContext.Provider>;
+    return <BEMStyleContext.Provider value={styles}>
+        {children}
+    </BEMStyleContext.Provider>;
 };
 
 export default BemStyles;

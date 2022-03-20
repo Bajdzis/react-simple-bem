@@ -1,6 +1,5 @@
 import {Tag} from '../Tag';
-import { BEMElementCreator } from '../../decorators/BEMElement';
 import { BEMNodeProps } from '../../decorators/BEMNode';
+import { bemElementDecorator } from '../../decorators';
 
-
-export const Element: React.FC<BEMNodeProps> = BEMElementCreator(Tag);
+export const Element: React.FC<BEMNodeProps> = bemElementDecorator(Tag);

@@ -1,5 +1,4 @@
 import { BemValue, BemInfo, BemSettingI, BemValueInObject } from './domain';
-import { BEMNodeProps } from './decorators/BEMNode';
 
 /**
  * Default setting
@@ -105,21 +104,4 @@ export function convertBemValueToArray(bemValue: BemValue): string[] {
     }
 
     return [];
-}
-
-/**
- * Delete from props many key before add to Html Element
- * @param {object} props
- * @return {object}
- */
-type ObjectWithAnyValue = {[key: string]: any};
-export function cleanUpProps(props: Partial<BEMNodeProps> & ObjectWithAnyValue): ObjectWithAnyValue {
-    props = {...props};
-
-    delete props.bemName;
-    delete props.bemMod;
-    delete props.className;
-    delete props.bemBlock;
-
-    return props;
 }
